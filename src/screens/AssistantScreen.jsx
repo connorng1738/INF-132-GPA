@@ -3,6 +3,13 @@ import './AssistantScreen.css'
 
 const TYPING_DELAY_MS = 1500
 
+const WELCOME_MESSAGE =
+  "Hi Maya! 👋 I'm your budget assistant. Ask me about any purchase you're considering and I'll tell you if you can afford it based on your current budget."
+
+const INITIAL_MESSAGES = [
+  { id: 'welcome', role: 'assistant', type: 'welcome' },
+]
+
 const BUDGET_ROWS = [
   { label: 'Weekly budget left', value: '$73', negative: false },
   { label: 'Concert ticket', value: '−$120', negative: true },
@@ -100,6 +107,14 @@ function DataRow({ label, value, negative }) {
   )
 }
 
+function WelcomeMessage() {
+  return (
+    <p className="assistant-welcome" aria-label="Assistant welcome message">
+      {WELCOME_MESSAGE}
+    </p>
+  )
+}
+
 function ConcertResponseCard() {
   return (
     <article className="ai-card" aria-label="Assistant response">
@@ -179,7 +194,7 @@ function GenericResponseCard() {
 
 function AssistantScreen({ onNavigate }) {
   const [input, setInput] = useState('')
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(INITIAL_MESSAGES)
   const contentRef = useRef(null)
 
   useEffect(() => {
@@ -267,6 +282,10 @@ function AssistantScreen({ onNavigate }) {
                 {message.text}
               </p>
             )
+          }
+
+          if (message.type === 'welcome') {
+            return <WelcomeMessage key={message.id} />
           }
 
           if (message.type === 'typing') {

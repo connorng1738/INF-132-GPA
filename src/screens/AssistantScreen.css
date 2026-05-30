@@ -78,6 +78,18 @@
   line-height: 1.45;
 }
 
+.assistant-welcome {
+  align-self: flex-start;
+  max-width: 88%;
+  margin: 0;
+  padding: calc(var(--font-size-body) * 0.933) calc(var(--font-size-body) * 1.067);
+  border-radius: var(--radius-button) calc(var(--radius-button) * 0.33) var(--radius-button) var(--radius-button);
+  background: var(--color-card-background);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body);
+  line-height: 1.45;
+}
+
 .typing-indicator {
   display: flex;
   align-items: center;
