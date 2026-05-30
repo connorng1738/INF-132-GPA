@@ -13,7 +13,8 @@
   min-height: 0;
   min-width: 0;
   overflow-y: auto;
-  padding-bottom: calc(var(--font-size-body) * 1.333);
+  padding-top: calc(var(--font-size-body) * 0.8);
+  padding-bottom: calc(var(--font-size-body) * 2.667);
 }
 
 .assistant-header {
@@ -148,26 +149,29 @@
 }
 
 .ai-card-badge {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: calc(var(--font-size-body) * 1.6);
-  height: calc(var(--font-size-body) * 1.6);
+  width: calc(var(--font-size-section-label) * 1.833);
+  height: calc(var(--font-size-section-label) * 1.833);
   border-radius: var(--radius-pill);
   background: var(--color-primary-dark);
   color: var(--color-card-background);
   flex-shrink: 0;
+  line-height: 0;
 }
 
 .ai-card-badge svg {
-  width: calc(var(--font-size-body) * 0.933);
-  height: calc(var(--font-size-body) * 0.933);
+  display: block;
+  width: calc(var(--font-size-section-label) * 1.083);
+  height: calc(var(--font-size-section-label) * 1.083);
 }
 
 .ai-card-label {
   margin: 0;
   font-size: var(--font-size-section-label);
   font-weight: 600;
+  line-height: 1;
   letter-spacing: var(--letter-spacing-section-label);
   text-transform: var(--text-transform-section-label);
   color: color-mix(in srgb, var(--color-primary-dark) 70%, var(--color-text-secondary));
@@ -264,7 +268,7 @@
   flex-shrink: 0;
   align-items: center;
   gap: calc(var(--font-size-body) * 0.667);
-  padding-top: calc(var(--font-size-body) * 0.8);
+  padding: calc(var(--font-size-body) * 0.8) 0 calc(var(--font-size-body) * 0.533);
 }
 
 .assistant-input {
