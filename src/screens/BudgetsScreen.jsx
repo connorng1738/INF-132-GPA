@@ -4,11 +4,12 @@ import './BudgetsScreen.css'
 const PRESET_LIMITS = [100, 150, 200, 250]
 
 const CATEGORY_CONFIG = [
-  { id: 'food', name: 'Food & Dining', emoji: '🥪', defaultLimit: 150, defaultSpent: 96 },
-  { id: 'groceries', name: 'Groceries', emoji: '🛒', defaultLimit: 200, defaultSpent: 142 },
-  { id: 'entertainment', name: 'Entertainment', emoji: '🎟️', defaultLimit: 80, defaultSpent: 58 },
-  { id: 'transport', name: 'Transport', emoji: '🚗', defaultLimit: 60, defaultSpent: 34 },
-  { id: 'subscriptions', name: 'Subscriptions', emoji: '🎧', defaultLimit: 30, defaultSpent: 23 },
+  { id: 'food', name: 'Food & Dining', defaultLimit: 150, defaultSpent: 96 },
+  { id: 'groceries', name: 'Groceries', defaultLimit: 200, defaultSpent: 142 },
+  { id: 'entertainment', name: 'Entertainment', defaultLimit: 80, defaultSpent: 58 },
+  { id: 'transport', name: 'Transport', defaultLimit: 60, defaultSpent: 34 },
+  { id: 'subscriptions', name: 'Subscriptions', defaultLimit: 30, defaultSpent: 23 },
+  { id: 'bills', name: 'Bills', defaultLimit: 100, defaultSpent: 47 },
 ]
 
 function BackArrowIcon() {
@@ -43,7 +44,6 @@ function getCategoryBudget(categoryName, appData) {
     percent,
     remaining,
     subtext: `${status} · $${remaining.toFixed(2)} left`,
-    emoji: fromApp?.emoji ?? config?.emoji ?? '💳',
   }
 }
 
@@ -114,9 +114,6 @@ function BudgetsScreen({
                   .join(' ')}
                 onClick={() => handleCategorySelect(category.name)}
               >
-                <span className="chip-emoji" aria-hidden="true">
-                  {category.emoji}
-                </span>
                 {category.name}
               </button>
             ))}
