@@ -5,6 +5,7 @@ export const colors = {
   textPrimary: '#1A1A1A',
   textSecondary: '#6B6B6B',
   warning: '#C0392B',
+  positive: '#3F9B6B',
   progressWarning: '#E6A817',
 }
 

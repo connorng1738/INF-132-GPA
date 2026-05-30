@@ -307,7 +307,7 @@
 }
 
 .list-row-amount--positive {
-  color: var(--color-primary-dark);
+  color: var(--color-positive);
 }
 
 .list-row-amount--negative {
