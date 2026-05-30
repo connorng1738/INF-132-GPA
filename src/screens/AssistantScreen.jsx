@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import './AssistantScreen.css'
 
 const TYPING_DELAY_MS = 1500
+const CONCERT_TYPING_DELAY_MS = 2800
 
 const WELCOME_MESSAGE =
   "Hi Maya! 👋 I'm your budget assistant. Ask me about any purchase you're considering and I'll tell you if you can afford it based on your current budget."
@@ -221,19 +222,8 @@ function AssistantScreen({ onNavigate }) {
     setInput('')
     setMessages((prev) => [...prev, userMessage])
 
-    if (isConcertAffordabilityQuery(text)) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `assistant-${Date.now()}`,
-          role: 'assistant',
-          type: 'concert',
-        },
-      ])
-      return
-    }
-
     const typingId = `assistant-${Date.now()}`
+    const isConcert = isConcertAffordabilityQuery(text)
 
     setMessages((prev) => [
       ...prev,
@@ -248,11 +238,11 @@ function AssistantScreen({ onNavigate }) {
       setMessages((prev) =>
         prev.map((message) =>
           message.id === typingId
-            ? { ...message, type: 'generic' }
+            ? { ...message, type: isConcert ? 'concert' : 'generic' }
             : message,
         ),
       )
-    }, TYPING_DELAY_MS)
+    }, isConcert ? CONCERT_TYPING_DELAY_MS : TYPING_DELAY_MS)
   }
 
   return (
