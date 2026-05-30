@@ -297,7 +297,7 @@
   width: var(--progress-fill);
   background: var(--color-primary-dark);
   transform-origin: left center;
-  animation: category-progress-fill 600ms ease-out both;
+  animation: category-progress-fill 600ms ease-out var(--progress-delay, 0ms) both;
 }
 
 @keyframes category-progress-fill {

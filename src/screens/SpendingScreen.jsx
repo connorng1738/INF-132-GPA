@@ -21,7 +21,7 @@ const PERIOD_VIEWS = {
       { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 28, limit: 38 },
       { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 18, limit: 20 },
       { id: 'transport', emoji: '🚗', name: 'Transport', spent: 10, limit: 12 },
-      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 8, limit: 10 },
+      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 6, limit: 8 },
     ],
     getTotals: (appData) => ({
       spent: appData?.weeklySpent ?? 102,
@@ -55,7 +55,7 @@ const PERIOD_VIEWS = {
   },
   Term: {
     summaryLabel: 'Spent this term',
-    dateRange: 'Mar – Jun 2026',
+    dateRange: 'Mar – Jun',
     budgetLabel: 'spring term budget',
     bars: [
       { id: 'march', label: 'March', height: '38%', current: false },
@@ -64,11 +64,11 @@ const PERIOD_VIEWS = {
       { id: 'june', label: 'June', height: '18%', current: true, starting: true },
     ],
     categories: [
-      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 45, limit: 600 },
-      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 32, limit: 450 },
-      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 18, limit: 240 },
-      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 12, limit: 180 },
-      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 9, limit: 90 },
+      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 380, limit: 600 },
+      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 290, limit: 450 },
+      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 142, limit: 240 },
+      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 89, limit: 180 },
+      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 69, limit: 90 },
     ],
     getTotals: () => ({
       spent: 1847,
@@ -198,7 +198,7 @@ function SpendingScreen({ onNavigate, appData }) {
         </div>
 
         <div key={activeSegment} className="category-list">
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             const progress = (category.spent / category.limit) * 100
             const warning = progress >= 70
 
@@ -235,13 +235,17 @@ function SpendingScreen({ onNavigate, appData }) {
                   aria-label={`${category.name} spending`}
                 >
                   <div
+                    key={`${activeSegment}-${category.id}`}
                     className={[
                       'category-progress-fill',
                       warning ? 'category-progress-fill--warning' : '',
                     ]
                       .filter(Boolean)
                       .join(' ')}
-                    style={{ '--progress-fill': `${progress}%` }}
+                    style={{
+                      '--progress-fill': `${progress}%`,
+                      '--progress-delay': `${index * 80}ms`,
+                    }}
                   />
                 </div>
               </button>
