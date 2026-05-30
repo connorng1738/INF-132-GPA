@@ -6,13 +6,13 @@ const SEGMENTS = ['Week', 'Month', 'Term']
 const PERIOD_VIEWS = {
   Week: {
     summaryLabel: 'Spent this week',
-    dateRange: 'Mon – Fri',
+    dateRange: 'May 12 – May 18',
     bars: [
-      { id: 'mon', label: 'Mon', height: '32%', current: false },
-      { id: 'tue', label: 'Tue', height: '48%', current: false },
-      { id: 'wed', label: 'Wed', height: '41%', current: false },
-      { id: 'thu', label: 'Thu', height: '67%', current: false },
-      { id: 'fri', label: 'Fri', height: '100%', current: true },
+      { id: 'mon', label: 'Mon 5/12', height: '32%', current: false },
+      { id: 'tue', label: 'Tue 5/13', height: '48%', current: false },
+      { id: 'wed', label: 'Wed 5/14', height: '41%', current: false },
+      { id: 'thu', label: 'Thu 5/15', height: '67%', current: false },
+      { id: 'fri', label: 'Fri 5/16', height: '100%', current: true },
     ],
     categories: [
       { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 38, limit: 50 },
@@ -30,10 +30,10 @@ const PERIOD_VIEWS = {
     summaryLabel: 'Spent in May',
     dateRange: 'May 1 – May 18',
     bars: [
-      { id: 'w1', label: 'W1', height: '42%', current: false },
-      { id: 'w2', label: 'W2', height: '58%', current: false },
-      { id: 'w3', label: 'W3', height: '50%', current: false },
-      { id: 'this', label: 'This', height: '100%', current: true },
+      { id: 'w1', label: 'W1', sublabel: 'May 1–7', height: '42%', current: false },
+      { id: 'w2', label: 'W2', sublabel: 'May 8–14', height: '58%', current: false },
+      { id: 'w3', label: 'W3', sublabel: 'May 15–21', height: '50%', current: false },
+      { id: 'this', label: 'This', sublabel: 'May 22–28', height: '100%', current: true },
     ],
     getTotals: (appData) => {
       const categories = appData?.categories ?? MONTH_FALLBACK_CATEGORIES
@@ -53,12 +53,12 @@ const PERIOD_VIEWS = {
   },
   Term: {
     summaryLabel: 'Spent this term',
-    dateRange: 'Jan – May',
+    dateRange: 'Mar – Jun 2026',
+    budgetLabel: 'spring term budget',
     bars: [
-      { id: 'm1', label: 'Month 1', height: '38%', current: false },
-      { id: 'm2', label: 'Month 2', height: '62%', current: false },
-      { id: 'm3', label: 'Month 3', height: '54%', current: false },
-      { id: 'this', label: 'This', height: '100%', current: true },
+      { id: 'march', label: 'March', height: '38%', current: false },
+      { id: 'april', label: 'April', height: '62%', current: false },
+      { id: 'may', label: 'May', height: '100%', current: true },
     ],
     categories: [
       { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 380, limit: 600 },
@@ -146,7 +146,9 @@ function SpendingScreen({ onNavigate, appData }) {
         <p className="summary-label">{view.summaryLabel}</p>
         <div className="summary-amount-row">
           <span className="summary-amount">${formatCurrency(spent)}</span>
-          <span className="summary-budget">of ${formatCurrency(budget)} budget</span>
+          <span className="summary-budget">
+            of ${formatCurrency(budget)} {view.budgetLabel ?? 'budget'}
+          </span>
         </div>
 
         <div key={activeSegment} className="bar-chart" aria-hidden="true">
@@ -164,7 +166,12 @@ function SpendingScreen({ onNavigate, appData }) {
                   '--bar-delay': `${index * 100}ms`,
                 }}
               />
-              <p className="bar-chart-label">{bar.label}</p>
+              <div className="bar-chart-labels">
+                <p className="bar-chart-label">{bar.label}</p>
+                {bar.sublabel ? (
+                  <p className="bar-chart-sublabel">{bar.sublabel}</p>
+                ) : null}
+              </div>
             </div>
           ))}
         </div>
