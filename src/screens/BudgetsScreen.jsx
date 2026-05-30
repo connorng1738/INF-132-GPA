@@ -1,20 +1,15 @@
 import { useState } from 'react'
 import './BudgetsScreen.css'
 
-const CATEGORIES = [
-  { name: 'Food & Dining', emoji: '🌮' },
-  { name: 'Groceries', emoji: '🛒' },
-  { name: 'Entertainment', emoji: '🎟️' },
-  { name: 'Transport', emoji: '🚗' },
-  { name: 'Subscriptions', emoji: '🎧' },
-]
-
 const PRESET_LIMITS = [100, 150, 200, 250]
 
-const MONTHLY_LIMIT = 150
-const SPENT = 96
-const SPENT_PERCENT = Math.round((SPENT / MONTHLY_LIMIT) * 100)
-const REMAINING = MONTHLY_LIMIT - SPENT
+const CATEGORY_CONFIG = [
+  { id: 'food', name: 'Food & Dining', emoji: '🥪', defaultLimit: 150, defaultSpent: 96 },
+  { id: 'groceries', name: 'Groceries', emoji: '🛒', defaultLimit: 200, defaultSpent: 142 },
+  { id: 'entertainment', name: 'Entertainment', emoji: '🎟️', defaultLimit: 80, defaultSpent: 58 },
+  { id: 'transport', name: 'Transport', emoji: '🚗', defaultLimit: 60, defaultSpent: 34 },
+  { id: 'subscriptions', name: 'Subscriptions', emoji: '🎧', defaultLimit: 30, defaultSpent: 23 },
+]
 
 function BackArrowIcon() {
   return (
@@ -30,9 +25,39 @@ function BackArrowIcon() {
   )
 }
 
-function BudgetsScreen({ onNavigate, appData, addTransaction }) {
+function getCategoryBudget(categoryName, appData) {
+  const config = CATEGORY_CONFIG.find((item) => item.name === categoryName)
+  const fromApp = appData?.categories?.find(
+    (item) => item.id === config?.id || item.name === categoryName,
+  )
+
+  const limit = fromApp?.limit ?? config?.defaultLimit ?? 150
+  const spent = fromApp?.spent ?? config?.defaultSpent ?? 0
+  const percent = Math.round((spent / limit) * 100)
+  const remaining = limit - spent
+  const status = percent >= 70 ? 'Getting close' : 'Plenty of room'
+
+  return {
+    limit,
+    spent,
+    percent,
+    remaining,
+    subtext: `${status} · $${remaining.toFixed(2)} left`,
+    emoji: fromApp?.emoji ?? config?.emoji ?? '💳',
+  }
+}
+
+function BudgetsScreen({ onNavigate, appData }) {
   const [selectedCategory, setSelectedCategory] = useState('Food & Dining')
   const [selectedPreset, setSelectedPreset] = useState(150)
+
+  const categoryBudget = getCategoryBudget(selectedCategory, appData)
+
+  function handleCategorySelect(categoryName) {
+    const budget = getCategoryBudget(categoryName, appData)
+    setSelectedCategory(categoryName)
+    setSelectedPreset(budget.limit)
+  }
 
   return (
     <div className="budgets-screen">
@@ -52,7 +77,7 @@ function BudgetsScreen({ onNavigate, appData, addTransaction }) {
         <section className="budgets-category-section" aria-label="Budget category">
           <p className="budgets-section-label">Category</p>
           <div className="category-chips" role="tablist" aria-label="Categories">
-            {CATEGORIES.map((category) => (
+            {CATEGORY_CONFIG.map((category) => (
               <button
                 key={category.name}
                 type="button"
@@ -64,7 +89,7 @@ function BudgetsScreen({ onNavigate, appData, addTransaction }) {
                 ]
                   .filter(Boolean)
                   .join(' ')}
-                onClick={() => setSelectedCategory(category.name)}
+                onClick={() => handleCategorySelect(category.name)}
               >
                 <span className="chip-emoji" aria-hidden="true">
                   {category.emoji}
@@ -104,28 +129,26 @@ function BudgetsScreen({ onNavigate, appData, addTransaction }) {
         <section className="spent-card" aria-label="Spent this month">
           <div className="spent-card-top">
             <p className="spent-card-label">Spent this month</p>
-            <p className="spent-card-percent">{SPENT_PERCENT}%</p>
+            <p className="spent-card-percent">{categoryBudget.percent}%</p>
           </div>
           <div className="spent-amount-row">
-            <span className="spent-amount">${SPENT}</span>
-            <span className="spent-limit">of ${MONTHLY_LIMIT}</span>
+            <span className="spent-amount">${categoryBudget.spent}</span>
+            <span className="spent-limit">of ${categoryBudget.limit}</span>
           </div>
           <div
             className="spent-progress"
             role="progressbar"
-            aria-valuenow={SPENT}
+            aria-valuenow={categoryBudget.spent}
             aria-valuemin={0}
-            aria-valuemax={MONTHLY_LIMIT}
+            aria-valuemax={categoryBudget.limit}
             aria-label="Monthly spending progress"
           >
             <div
               className="spent-progress-fill"
-              style={{ '--progress-fill': `${SPENT_PERCENT}%` }}
+              style={{ '--progress-fill': `${categoryBudget.percent}%` }}
             />
           </div>
-          <p className="spent-subtext">
-            Plenty of room · ${REMAINING.toFixed(2)} left
-          </p>
+          <p className="spent-subtext">{categoryBudget.subtext}</p>
         </section>
       </div>
 
