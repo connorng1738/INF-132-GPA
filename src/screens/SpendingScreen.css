@@ -107,6 +107,37 @@
   height: calc(var(--font-size-body) * 5.333);
 }
 
+.bar-chart--week {
+  gap: calc(var(--font-size-body) * 0.267);
+}
+
+.bar-chart--week .bar-chart-item {
+  min-width: 0;
+}
+
+.bar-chart--week .bar-chart-bar {
+  max-width: calc(var(--font-size-body) * 1.467);
+}
+
+.bar-chart--week .bar-chart-label {
+  font-size: calc(var(--font-size-body) * 0.667);
+  white-space: nowrap;
+}
+
+.bar-chart--term {
+  gap: calc(var(--font-size-body) * 0.533);
+}
+
+.bar-chart--term .bar-chart-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.bar-chart--term .bar-chart-bar {
+  width: 100%;
+  max-width: none;
+}
+
 .bar-chart-item {
   display: flex;
   flex: 1;
@@ -139,6 +170,10 @@
 
 .bar-chart-bar--current {
   background: var(--color-primary-dark);
+}
+
+.bar-chart-bar--starting {
+  background: color-mix(in srgb, var(--color-primary-dark) 16%, var(--color-background));
 }
 
 .bar-chart-labels {

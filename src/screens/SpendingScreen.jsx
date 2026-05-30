@@ -8,11 +8,13 @@ const PERIOD_VIEWS = {
     summaryLabel: 'Spent this week',
     dateRange: 'May 12 – May 18',
     bars: [
-      { id: 'mon', label: 'Mon 5/12', height: '32%', current: false },
-      { id: 'tue', label: 'Tue 5/13', height: '48%', current: false },
-      { id: 'wed', label: 'Wed 5/14', height: '41%', current: false },
-      { id: 'thu', label: 'Thu 5/15', height: '67%', current: false },
-      { id: 'fri', label: 'Fri 5/16', height: '100%', current: true },
+      { id: 'mon', label: 'Mon 5/12', height: '28%', current: false },
+      { id: 'tue', label: 'Tue 5/13', height: '42%', current: false },
+      { id: 'wed', label: 'Wed 5/14', height: '36%', current: false },
+      { id: 'thu', label: 'Thu 5/15', height: '58%', current: false },
+      { id: 'fri', label: 'Fri 5/16', height: '72%', current: false },
+      { id: 'sat', label: 'Sat 5/17', height: '55%', current: false },
+      { id: 'sun', label: 'Sun 5/18', height: '100%', current: true },
     ],
     categories: [
       { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 38, limit: 50 },
@@ -30,10 +32,10 @@ const PERIOD_VIEWS = {
     summaryLabel: 'Spent in May',
     dateRange: 'May 1 – May 18',
     bars: [
-      { id: 'w1', label: 'W1', sublabel: 'May 1–7', height: '42%', current: false },
-      { id: 'w2', label: 'W2', sublabel: 'May 8–14', height: '58%', current: false },
-      { id: 'w3', label: 'W3', sublabel: 'May 15–21', height: '50%', current: false },
-      { id: 'this', label: 'This', sublabel: 'May 22–28', height: '100%', current: true },
+      { id: 'w1', label: 'Week 1', sublabel: 'May 1–7', height: '42%', current: false },
+      { id: 'w2', label: 'Week 2', sublabel: 'May 8–14', height: '58%', current: false },
+      { id: 'w3', label: 'Week 3', sublabel: 'May 15–21', height: '50%', current: false },
+      { id: 'w4', label: 'Week 4', sublabel: 'May 22–28', height: '100%', current: true },
     ],
     getTotals: (appData) => {
       const categories = appData?.categories ?? MONTH_FALLBACK_CATEGORIES
@@ -58,14 +60,15 @@ const PERIOD_VIEWS = {
     bars: [
       { id: 'march', label: 'March', height: '38%', current: false },
       { id: 'april', label: 'April', height: '62%', current: false },
-      { id: 'may', label: 'May', height: '100%', current: true },
+      { id: 'may', label: 'May', height: '88%', current: false },
+      { id: 'june', label: 'June', height: '18%', current: true, starting: true },
     ],
     categories: [
-      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 380, limit: 600 },
-      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 290, limit: 450 },
-      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 142, limit: 240 },
-      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 89, limit: 180 },
-      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 69, limit: 90 },
+      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 45, limit: 600 },
+      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 32, limit: 450 },
+      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 18, limit: 240 },
+      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 12, limit: 180 },
+      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 9, limit: 90 },
     ],
     getTotals: () => ({
       spent: 1847,
@@ -151,13 +154,24 @@ function SpendingScreen({ onNavigate, appData }) {
           </span>
         </div>
 
-        <div key={activeSegment} className="bar-chart" aria-hidden="true">
+        <div
+          key={activeSegment}
+          className={[
+            'bar-chart',
+            activeSegment === 'Week' ? 'bar-chart--week' : '',
+            activeSegment === 'Term' ? 'bar-chart--term' : '',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+          aria-hidden="true"
+        >
           {view.bars.map((bar, index) => (
             <div key={bar.id} className="bar-chart-item">
               <div
                 className={[
                   'bar-chart-bar',
-                  bar.current ? 'bar-chart-bar--current' : '',
+                  bar.starting ? 'bar-chart-bar--starting' : '',
+                  bar.current && !bar.starting ? 'bar-chart-bar--current' : '',
                 ]
                   .filter(Boolean)
                   .join(' ')}
