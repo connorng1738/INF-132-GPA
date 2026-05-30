@@ -3,9 +3,6 @@ import './AssistantScreen.css'
 
 const TYPING_DELAY_MS = 1500
 
-const INITIAL_USER_MESSAGE =
-  'Can I afford a $120 concert ticket this weekend?'
-
 const BUDGET_ROWS = [
   { label: 'Weekly budget left', value: '$73', negative: false },
   { label: 'Concert ticket', value: '−$120', negative: true },
@@ -182,10 +179,7 @@ function GenericResponseCard() {
 
 function AssistantScreen({ onNavigate }) {
   const [input, setInput] = useState('')
-  const [messages, setMessages] = useState([
-    { id: 'initial-user', role: 'user', text: INITIAL_USER_MESSAGE },
-    { id: 'initial-assistant', role: 'assistant', type: 'concert' },
-  ])
+  const [messages, setMessages] = useState([])
   const contentRef = useRef(null)
 
   useEffect(() => {
