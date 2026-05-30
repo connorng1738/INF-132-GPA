@@ -84,6 +84,7 @@ function buildRecentActivity(transactions, categories) {
       subtitle: `${transaction.date} · ${transaction.category}`,
       amount: formatTransactionAmount(transaction),
       positive: transaction.type === 'income',
+      negative: transaction.type === 'expense',
     }))
 }
 
@@ -103,6 +104,7 @@ function ListCard({ items }) {
             className={[
               'list-row-amount',
               item.positive ? 'list-row-amount--positive' : '',
+              item.negative ? 'list-row-amount--negative' : '',
             ]
               .filter(Boolean)
               .join(' ')}

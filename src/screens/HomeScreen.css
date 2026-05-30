@@ -310,6 +310,10 @@
   color: var(--color-primary-dark);
 }
 
+.list-row-amount--negative {
+  color: var(--color-warning);
+}
+
 @media (hover: hover) {
   .balance-card:hover {
     transform: scale(1.01);
