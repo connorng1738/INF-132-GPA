@@ -1,3 +1,9 @@
+import {
+  AssistantIcon,
+  BudgetsIcon,
+  PlusIcon,
+  SpendingIcon,
+} from '../icons.jsx'
 import './HomeScreen.css'
 
 const WEEKLY_BUDGET_TOTAL = 175
@@ -13,10 +19,10 @@ const QUICK_ACTION_TABS = {
 }
 
 const QUICK_ACTIONS = [
-  { id: 'log', label: 'Log', icon: '+' },
-  { id: 'spending', label: 'Spending', icon: '📊' },
-  { id: 'budgets', label: 'Budgets', icon: '💳' },
-  { id: 'ask-ai', label: 'Ask AI', icon: '✨' },
+  { id: 'log', label: 'Log', Icon: PlusIcon },
+  { id: 'spending', label: 'Spending', Icon: SpendingIcon },
+  { id: 'budgets', label: 'Budgets', Icon: BudgetsIcon },
+  { id: 'ask-ai', label: 'Ask AI', Icon: AssistantIcon },
 ]
 
 const UPCOMING_BILLS = [
@@ -179,27 +185,23 @@ function HomeScreen({ onNavigate, appData }) {
       </section>
 
       <section className="quick-actions" aria-label="Quick actions">
-        {QUICK_ACTIONS.map((action) => (
-          <button
-            key={action.id}
-            type="button"
-            className="quick-action"
-            onClick={() => onNavigate?.(QUICK_ACTION_TABS[action.id])}
-          >
-            <span
-              className={[
-                'quick-action-icon',
-                action.icon === '+' ? 'quick-action-icon--plus' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-              aria-hidden="true"
+        {QUICK_ACTIONS.map((action) => {
+          const ActionIcon = action.Icon
+
+          return (
+            <button
+              key={action.id}
+              type="button"
+              className="quick-action"
+              onClick={() => onNavigate?.(QUICK_ACTION_TABS[action.id])}
             >
-              {action.icon}
-            </span>
-            <span className="quick-action-label">{action.label}</span>
-          </button>
-        ))}
+              <span className="quick-action-icon" aria-hidden="true">
+                <ActionIcon />
+              </span>
+              <span className="quick-action-label">{action.label}</span>
+            </button>
+          )
+        })}
       </section>
 
       <section aria-label="Upcoming bills">

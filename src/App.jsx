@@ -4,13 +4,26 @@ import SpendingScreen from './screens/SpendingScreen.jsx'
 import BudgetsScreen from './screens/BudgetsScreen.jsx'
 import AssistantScreen from './screens/AssistantScreen.jsx'
 import LogScreen from './screens/LogScreen.jsx'
+import {
+  AssistantIcon,
+  BudgetsIcon,
+  HomeIcon,
+  SpendingIcon,
+} from './icons.jsx'
+
+const TAB_ICONS = {
+  home: HomeIcon,
+  spending: SpendingIcon,
+  budgets: BudgetsIcon,
+  assistant: AssistantIcon,
+}
 
 const TABS = [
-  { id: 'home', label: 'Home', icon: '🏠' },
-  { id: 'spending', label: 'Spending', icon: '📊' },
+  { id: 'home', label: 'Home' },
+  { id: 'spending', label: 'Spending' },
   { id: 'log', label: 'Log', fab: true },
-  { id: 'budgets', label: 'Budgets', icon: '💳' },
-  { id: 'assistant', label: 'Assistant', icon: '✨' },
+  { id: 'budgets', label: 'Budgets' },
+  { id: 'assistant', label: 'Assistant' },
 ]
 
 const SCREENS = {
@@ -133,7 +146,10 @@ function App() {
       ) : null}
 
       <nav className="tab-bar" aria-label="Main navigation">
-        {TABS.map((tab) => (
+        {TABS.map((tab) => {
+          const Icon = TAB_ICONS[tab.id]
+
+          return (
           <button
             key={tab.id}
             type="button"
@@ -151,13 +167,14 @@ function App() {
             {tab.fab ? '+' : (
               <>
                 <span className="tab-bar-icon" aria-hidden="true">
-                  {tab.icon}
+                  {Icon ? <Icon /> : null}
                 </span>
                 <span className="tab-bar-label">{tab.label}</span>
               </>
             )}
           </button>
-        ))}
+          )
+        })}
       </nav>
     </div>
   )
