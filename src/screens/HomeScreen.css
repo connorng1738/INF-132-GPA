@@ -51,10 +51,15 @@
 }
 
 .balance-card {
+  width: 100%;
   padding: calc(var(--font-size-balance) * 0.5);
+  border: none;
   border-radius: var(--radius-card);
   background: var(--color-primary-dark);
   color: var(--color-card-background);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
 .balance-label {
@@ -305,12 +310,23 @@
 }
 
 @media (hover: hover) {
+  .balance-card:hover {
+    transform: scale(1.01);
+    box-shadow:
+      0 calc(var(--font-size-body) * 0.4) calc(var(--font-size-body) * 1.2)
+        color-mix(in srgb, var(--color-primary-dark) 35%, transparent);
+  }
+
   .quick-action:hover {
     transform: scale(1.02);
     box-shadow:
       0 calc(var(--font-size-body) * 0.27) calc(var(--font-size-body) * 0.8)
         color-mix(in srgb, var(--color-text-primary) 12%, transparent);
   }
+}
+
+.balance-card:active {
+  transform: scale(0.99);
 }
 
 .quick-action:active {

@@ -42,7 +42,23 @@ const INITIAL_APP_DATA = {
 function App() {
   const [activeTab, setActiveTab] = useState('home')
   const [appData, setAppData] = useState(INITIAL_APP_DATA)
+  const [budgetCategory, setBudgetCategory] = useState('Food & Dining')
+  const [toast, setToast] = useState(null)
   const ActiveScreen = SCREENS[activeTab]
+
+  function handleNavigate(tab, options = {}) {
+    if (options.budgetCategory) {
+      setBudgetCategory(options.budgetCategory)
+    }
+    setActiveTab(tab)
+  }
+
+  function showToast(message) {
+    setToast(message)
+    window.setTimeout(() => {
+      setToast(null)
+    }, 1500)
+  }
 
   function addTransaction(transaction) {
     const expenseAmount = Math.abs(transaction.amount)
@@ -95,9 +111,12 @@ function App() {
         <div key={activeTab} className="screen-fade-in">
           {ActiveScreen ? (
             <ActiveScreen
-              onNavigate={setActiveTab}
+              onNavigate={handleNavigate}
               appData={appData}
               addTransaction={addTransaction}
+              budgetCategory={budgetCategory}
+              onBudgetCategoryChange={setBudgetCategory}
+              showToast={showToast}
             />
           ) : (
             <div className="placeholder-screen">
@@ -106,6 +125,12 @@ function App() {
           )}
         </div>
       </main>
+
+      {toast ? (
+        <div className="app-toast" role="status" aria-live="polite">
+          {toast}
+        </div>
+      ) : null}
 
       <nav className="tab-bar" aria-label="Main navigation">
         {TABS.map((tab) => (
@@ -121,7 +146,7 @@ function App() {
               .join(' ')}
             aria-current={activeTab === tab.id ? 'page' : undefined}
             aria-label={tab.label}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleNavigate(tab.id)}
           >
             {tab.fab ? '+' : (
               <>

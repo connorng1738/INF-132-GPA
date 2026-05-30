@@ -69,7 +69,7 @@ function getTodayLabel() {
   return 'Today'
 }
 
-function LogScreen({ onNavigate, appData, addTransaction }) {
+function LogScreen({ onNavigate, addTransaction, showToast }) {
   const [amount, setAmount] = useState('0')
   const [selectedCategory, setSelectedCategory] = useState('food')
   const [description, setDescription] = useState('Coffee & sandwich')
@@ -126,6 +126,7 @@ function LogScreen({ onNavigate, appData, addTransaction }) {
       note: note.trim() || undefined,
     })
 
+    showToast?.('Expense logged!')
     onNavigate?.('home')
   }
 

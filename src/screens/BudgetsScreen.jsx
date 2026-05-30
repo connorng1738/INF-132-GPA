@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './BudgetsScreen.css'
 
 const PRESET_LIMITS = [100, 150, 200, 250]
@@ -47,16 +47,39 @@ function getCategoryBudget(categoryName, appData) {
   }
 }
 
-function BudgetsScreen({ onNavigate, appData }) {
-  const [selectedCategory, setSelectedCategory] = useState('Food & Dining')
+function BudgetsScreen({
+  onNavigate,
+  appData,
+  budgetCategory,
+  onBudgetCategoryChange,
+  showToast,
+}) {
+  const [selectedCategory, setSelectedCategory] = useState(
+    budgetCategory ?? 'Food & Dining',
+  )
   const [selectedPreset, setSelectedPreset] = useState(150)
 
   const categoryBudget = getCategoryBudget(selectedCategory, appData)
+
+  useEffect(() => {
+    if (!budgetCategory) {
+      return
+    }
+
+    const budget = getCategoryBudget(budgetCategory, appData)
+    setSelectedCategory(budgetCategory)
+    setSelectedPreset(budget.limit)
+  }, [budgetCategory, appData])
 
   function handleCategorySelect(categoryName) {
     const budget = getCategoryBudget(categoryName, appData)
     setSelectedCategory(categoryName)
     setSelectedPreset(budget.limit)
+    onBudgetCategoryChange?.(categoryName)
+  }
+
+  function handleSaveBudget() {
+    showToast?.('Budget saved!')
   }
 
   return (
@@ -153,7 +176,7 @@ function BudgetsScreen({ onNavigate, appData }) {
       </div>
 
       <div className="budgets-footer">
-        <button type="button" className="save-budget-button">
+        <button type="button" className="save-budget-button" onClick={handleSaveBudget}>
           Save budget
         </button>
       </div>

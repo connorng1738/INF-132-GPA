@@ -240,9 +240,14 @@ function HomeScreen({ onNavigate, appData }) {
         </div>
       </header>
 
-      <section className="balance-card" aria-label="Available balance">
+      <button
+        type="button"
+        className="balance-card"
+        aria-label={`Available balance $${balance.toFixed(2)}. View spending.`}
+        onClick={() => onNavigate?.('spending')}
+      >
         <p className="balance-label">Available balance</p>
-        <div className="balance-amount" aria-label={`$${balance.toFixed(2)}`}>
+        <div className="balance-amount" aria-hidden="true">
           <span className="balance-currency">$</span>
           <span className="balance-dollars">{dollars}</span>
           <span className="balance-cents">.{cents}</span>
@@ -253,7 +258,7 @@ function HomeScreen({ onNavigate, appData }) {
           </span>
           +$312.40 from campus job today
         </p>
-      </section>
+      </button>
 
       <section className="weekly-budget-card" aria-label="Weekly budget">
         <div className="weekly-budget-row">

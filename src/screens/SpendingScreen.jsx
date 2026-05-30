@@ -203,7 +203,15 @@ function SpendingScreen({ onNavigate, appData }) {
             const warning = progress >= 70
 
             return (
-              <div key={category.id} className="category-row">
+              <button
+                key={category.id}
+                type="button"
+                className="category-row category-row--interactive"
+                aria-label={`View ${category.name} budget`}
+                onClick={() =>
+                  onNavigate?.('budgets', { budgetCategory: category.name })
+                }
+              >
                 <div className="category-row-top">
                   <div className="category-row-icon" aria-hidden="true">
                     {category.emoji}
@@ -236,7 +244,7 @@ function SpendingScreen({ onNavigate, appData }) {
                     style={{ '--progress-fill': `${progress}%` }}
                   />
                 </div>
-              </div>
+              </button>
             )
           })}
         </div>

@@ -227,6 +227,16 @@
   padding: calc(var(--font-size-body) * 1.067) calc(var(--font-size-body) * 1.2);
 }
 
+.category-row--interactive {
+  display: block;
+  width: 100%;
+  border: none;
+  background: var(--color-card-background);
+  text-align: left;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
 .category-row + .category-row {
   border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
 }
@@ -305,6 +315,10 @@
 }
 
 @media (hover: hover) {
+  .category-row--interactive:hover {
+    background: color-mix(in srgb, var(--color-text-secondary) 6%, var(--color-card-background));
+  }
+
   .segmented-control-option:not(.is-active):hover {
     transform: scale(1.02);
     box-shadow:
