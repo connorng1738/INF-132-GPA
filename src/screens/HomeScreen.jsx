@@ -13,10 +13,10 @@ const QUICK_ACTION_TABS = {
 }
 
 const QUICK_ACTIONS = [
-  { id: 'log', label: 'Log', primary: true },
-  { id: 'spending', label: 'Spending' },
-  { id: 'budgets', label: 'Budgets' },
-  { id: 'ask-ai', label: 'Ask AI' },
+  { id: 'log', label: 'Log', icon: '+' },
+  { id: 'spending', label: 'Spending', icon: '📊' },
+  { id: 'budgets', label: 'Budgets', icon: '💳' },
+  { id: 'ask-ai', label: 'Ask AI', icon: '✨' },
 ]
 
 const UPCOMING_BILLS = [
@@ -79,117 +79,6 @@ function buildRecentActivity(transactions, categories) {
       amount: formatTransactionAmount(transaction),
       positive: transaction.type === 'income',
     }))
-}
-
-function PlusIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M12 5v14M5 12h14"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}
-
-function PieChartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <path
-        d="M12 3a9 9 0 0 1 9 9H12V3Z"
-        fill="currentColor"
-      />
-    </svg>
-  )
-}
-
-function WalletIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect
-        x="3"
-        y="6"
-        width="18"
-        height="14"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <path
-        d="M3 10h18"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <rect
-        x="14"
-        y="12"
-        width="7"
-        height="6"
-        rx="1"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <circle cx="16.5" cy="15" r="1" fill="currentColor" />
-    </svg>
-  )
-}
-
-function SparkleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M12 2l1.4 4.6L18 8l-4.6 1.4L12 14l-1.4-4.6L6 8l4.6-1.4L12 2Z"
-        fill="currentColor"
-      />
-      <path
-        d="M19 13l.9 2.7L22.5 17l-2.6.8L19 20.5l-.9-2.7L15.5 17l2.6-.8L19 13Z"
-        fill="currentColor"
-      />
-    </svg>
-  )
-}
-
-function QuickActionIcon({ id }) {
-  const iconClass = 'quick-action-icon'
-
-  if (id === 'log') {
-    return (
-      <span className={iconClass}>
-        <PlusIcon />
-      </span>
-    )
-  }
-
-  if (id === 'spending') {
-    return (
-      <span className={iconClass}>
-        <PieChartIcon />
-      </span>
-    )
-  }
-
-  if (id === 'budgets') {
-    return (
-      <span className={iconClass}>
-        <WalletIcon />
-      </span>
-    )
-  }
-
-  return (
-    <span className={iconClass}>
-      <SparkleIcon />
-    </span>
-  )
 }
 
 function ListCard({ items }) {
@@ -294,16 +183,21 @@ function HomeScreen({ onNavigate, appData }) {
           <button
             key={action.id}
             type="button"
-            className={[
-              'quick-action',
-              action.primary ? 'quick-action--primary' : '',
-            ]
-              .filter(Boolean)
-              .join(' ')}
+            className="quick-action"
             onClick={() => onNavigate?.(QUICK_ACTION_TABS[action.id])}
           >
-            <QuickActionIcon id={action.id} />
-            {action.label}
+            <span
+              className={[
+                'quick-action-icon',
+                action.icon === '+' ? 'quick-action-icon--plus' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              aria-hidden="true"
+            >
+              {action.icon}
+            </span>
+            <span className="quick-action-label">{action.label}</span>
           </button>
         ))}
       </section>
