@@ -30,45 +30,39 @@
 
 body {
   margin: 0;
-  background: #F2EFE9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  background: var(--color-background);
   color: var(--color-text-primary);
   font-size: var(--font-size-body);
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 390px;
+  position: relative;
+  width: 390px;
+  height: 844px;
+  max-width: 100%;
+  overflow: hidden;
   margin: 0 auto;
-  min-height: 100dvh;
+  background: var(--color-background);
 }
 
 @media (min-width: 431px) {
   body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100dvh;
     padding: calc(var(--font-size-body) * 2);
     background: color-mix(in srgb, var(--color-text-secondary) 14%, var(--color-background));
   }
 
   #root {
-    position: relative;
-    width: 100%;
-    max-width: 390px;
-    min-height: calc(100dvh - var(--font-size-body) * 4);
-    margin: 0;
     border: 2px solid color-mix(in srgb, var(--color-text-primary) 30%, var(--color-text-secondary));
     border-radius: 40px;
-    background: var(--color-background);
     box-shadow:
       0 calc(var(--font-size-body) * 2) calc(var(--font-size-body) * 4)
         color-mix(in srgb, var(--color-text-primary) 18%, transparent),
       0 calc(var(--font-size-body) * 0.667) calc(var(--font-size-body) * 1.6)
         color-mix(in srgb, var(--color-text-primary) 10%, transparent);
-    overflow: hidden;
   }
 
   #root::before {
@@ -86,7 +80,6 @@ body {
   }
 
   .app {
-    min-height: 100%;
     padding-top: calc(var(--font-size-body) * 1.333);
   }
 
@@ -98,18 +91,22 @@ body {
 
 .app {
   display: flex;
-  flex: 1;
   flex-direction: column;
   width: 100%;
-  min-height: 100dvh;
+  height: 100%;
+  overflow: hidden;
 }
 
 .app-main {
   flex: 1;
-  padding: 24px 16px 96px;
+  min-height: 0;
+  overflow: hidden;
+  padding: 24px 16px 0;
 }
 
 .screen-fade-in {
+  height: 100%;
+  overflow: hidden;
   animation: screen-fade-in 200ms ease forwards;
 }
 
@@ -133,15 +130,13 @@ body {
 }
 
 .tab-bar {
-  position: sticky;
-  bottom: 0;
+  position: relative;
   z-index: 100;
   display: grid;
+  flex-shrink: 0;
   grid-template-columns: repeat(5, 1fr);
   align-items: flex-end;
   width: 100%;
-  max-width: 390px;
-  margin-top: auto;
   padding: calc(var(--font-size-section-label) * 0.67) calc(var(--font-size-section-label) * 0.67) calc(var(--font-size-body) * 1.6);
   background: var(--color-card-background);
   border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 8%, transparent);

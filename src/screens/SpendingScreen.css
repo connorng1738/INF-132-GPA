@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: calc(var(--font-size-body) * 1.333);
+  height: 100%;
   overflow-y: auto;
-  min-height: 100%;
-  padding-bottom: calc(var(--font-size-body) * 8);
+  padding-bottom: calc(var(--font-size-body) * 1.333);
 }
 
 .spending-header {
