@@ -5,7 +5,7 @@ const TYPING_DELAY_MS = 1500
 const CONCERT_TYPING_DELAY_MS = 2800
 
 const WELCOME_MESSAGE =
-  "Hi Maya! 👋 I'm your budget assistant. Ask me about any purchase you're considering and I'll tell you if you can afford it based on your current budget."
+  "Hi Maya! 👋 I'm your budget assistant. Ask me about any purchase or budget decision and I'll help you figure it out."
 
 const INITIAL_MESSAGES = [
   { id: 'welcome', role: 'assistant', type: 'welcome' },
@@ -22,6 +22,36 @@ const CONTEXT_ROWS = [
   { label: 'Upcoming bills (next 14d)', value: '$1042', negative: false },
   { label: 'Available after bills', value: '$-200', negative: false },
 ]
+
+const REALLOCATION_ROWS = [
+  { label: 'Entertainment budget left', value: '$22', negative: false },
+  { label: 'Still needed', value: '$58', negative: true },
+  { label: 'Concert ticket', value: '$80', negative: false },
+]
+
+const AFTER_REALLOCATION_ROWS = [
+  { label: 'Food & Dining', value: '$96/$120 (adjusted)', negative: false },
+  { label: 'Groceries', value: '$142/$172 (adjusted)', negative: false },
+  {
+    label: 'Entertainment',
+    value: '$58/$102 (covered ✓)',
+    negative: false,
+    positive: true,
+  },
+]
+
+const REALLOCATION_KEYWORDS = [
+  'reallocate',
+  'reallocation',
+  '$80 concert',
+  'fit in',
+  'budget for concert',
+]
+
+function isReallocationQuery(text) {
+  const normalized = text.toLowerCase().trim()
+  return REALLOCATION_KEYWORDS.some((keyword) => normalized.includes(keyword))
+}
 
 function isConcertAffordabilityQuery(text) {
   const normalized = text.toLowerCase().trim()
@@ -90,7 +120,7 @@ function SendIcon() {
   )
 }
 
-function DataRow({ label, value, negative }) {
+function DataRow({ label, value, negative, positive }) {
   return (
     <div className="data-row">
       <p className="data-row-label">{label}</p>
@@ -98,6 +128,7 @@ function DataRow({ label, value, negative }) {
         className={[
           'data-row-value',
           negative ? 'data-row-value--negative' : '',
+          positive ? 'data-row-value--positive' : '',
         ]
           .filter(Boolean)
           .join(' ')}
@@ -113,6 +144,49 @@ function WelcomeMessage() {
     <p className="assistant-welcome" aria-label="Assistant welcome message">
       {WELCOME_MESSAGE}
     </p>
+  )
+}
+
+function ReallocationResponseCard() {
+  return (
+    <article className="ai-card" aria-label="Assistant response">
+      <div className="ai-card-body">
+        <div className="ai-card-label-row">
+          <span className="ai-card-badge" aria-hidden="true">
+            <SparkleIcon />
+          </span>
+          <p className="ai-card-label">Based on your account</p>
+        </div>
+
+        <h2 className="ai-card-headline">Here&apos;s how you can make it work.</h2>
+
+        <p className="ai-card-text">
+          Your $80 concert ticket is doable with a few adjustments.
+        </p>
+
+        <div className="data-table">
+          {REALLOCATION_ROWS.map((row) => (
+            <DataRow key={row.label} {...row} />
+          ))}
+        </div>
+
+        <div className="suggestion-box">
+          <p className="suggestion-label">Suggestion</p>
+          <p className="suggestion-text">
+            Move $30 from Food &amp; Dining (you have $54 left) and $28 from
+            Groceries (you have $58 left) into Entertainment. That covers the
+            ticket and keeps all your other categories in the green.
+          </p>
+        </div>
+
+        <div className="data-section">
+          <p className="data-section-label">After reallocation</p>
+          {AFTER_REALLOCATION_ROWS.map((row) => (
+            <DataRow key={row.label} {...row} />
+          ))}
+        </div>
+      </div>
+    </article>
   )
 }
 
@@ -223,7 +297,15 @@ function AssistantScreen({ onNavigate }) {
     setMessages((prev) => [...prev, userMessage])
 
     const typingId = `assistant-${Date.now()}`
-    const isConcert = isConcertAffordabilityQuery(text)
+    const isReallocation = isReallocationQuery(text)
+    const isConcert = !isReallocation && isConcertAffordabilityQuery(text)
+    const responseType = isReallocation
+      ? 'reallocation'
+      : isConcert
+        ? 'concert'
+        : 'generic'
+    const typingDelay =
+      isReallocation || isConcert ? CONCERT_TYPING_DELAY_MS : TYPING_DELAY_MS
 
     setMessages((prev) => [
       ...prev,
@@ -237,12 +319,10 @@ function AssistantScreen({ onNavigate }) {
     window.setTimeout(() => {
       setMessages((prev) =>
         prev.map((message) =>
-          message.id === typingId
-            ? { ...message, type: isConcert ? 'concert' : 'generic' }
-            : message,
+          message.id === typingId ? { ...message, type: responseType } : message,
         ),
       )
-    }, isConcert ? CONCERT_TYPING_DELAY_MS : TYPING_DELAY_MS)
+    }, typingDelay)
   }
 
   return (
@@ -280,6 +360,10 @@ function AssistantScreen({ onNavigate }) {
 
           if (message.type === 'typing') {
             return <TypingIndicator key={message.id} />
+          }
+
+          if (message.type === 'reallocation') {
+            return <ReallocationResponseCard key={message.id} />
           }
 
           if (message.type === 'concert') {

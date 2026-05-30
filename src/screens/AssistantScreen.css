@@ -229,8 +229,22 @@
   color: var(--color-warning);
 }
 
+.data-row-value--positive {
+  color: var(--color-positive);
+}
+
 .data-section {
-  margin-bottom: calc(var(--font-size-body) * 1.067);
+  margin-top: calc(var(--font-size-body) * 1.067);
+  margin-bottom: 0;
+}
+
+.data-section-label {
+  margin: 0 0 calc(var(--font-size-body) * 0.667);
+  font-size: var(--font-size-section-label);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-section-label);
+  text-transform: var(--text-transform-section-label);
+  color: var(--color-text-secondary);
 }
 
 .data-section .data-row {
