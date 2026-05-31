@@ -270,15 +270,23 @@ function GenericResponseCard() {
 function AssistantScreen({ onNavigate }) {
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState(INITIAL_MESSAGES)
-  const messagesEndRef = useRef(null)
+  const messagesRef = useRef(null)
 
   useEffect(() => {
+    const container = messagesRef.current
+    if (!container) {
+      return
+    }
+
     const scrollToLatest = () => {
-      messagesEndRef.current?.scrollIntoView({ block: 'end' })
+      container.scrollTop = container.scrollHeight
     }
 
     scrollToLatest()
-    window.requestAnimationFrame(scrollToLatest)
+    window.requestAnimationFrame(() => {
+      scrollToLatest()
+      window.requestAnimationFrame(scrollToLatest)
+    })
   }, [messages])
 
   function handleSubmit(event) {
@@ -346,7 +354,7 @@ function AssistantScreen({ onNavigate }) {
         </h1>
       </header>
 
-      <div className="assistant-messages">
+      <div className="assistant-messages" ref={messagesRef}>
         {messages.map((message) => {
           if (message.role === 'user') {
             return (
@@ -374,7 +382,6 @@ function AssistantScreen({ onNavigate }) {
 
           return <GenericResponseCard key={message.id} />
         })}
-        <div ref={messagesEndRef} className="assistant-messages-end" aria-hidden="true" />
       </div>
 
       <form className="assistant-input-bar" onSubmit={handleSubmit}>

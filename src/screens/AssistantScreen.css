@@ -21,15 +21,15 @@
   gap: calc(var(--font-size-body) * 1.067);
   min-height: 0;
   min-width: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(var(--font-size-body) * 0.8);
+  padding-bottom: calc(var(--font-size-body) * 1.6);
 }
 
-.assistant-messages-end {
+.assistant-messages > * {
   flex-shrink: 0;
-  height: 1px;
 }
 
 .assistant-back {
@@ -141,6 +141,8 @@
 }
 
 .ai-card {
+  flex-shrink: 0;
+  width: 100%;
   border-radius: var(--radius-card);
   background: var(--color-card-background);
   overflow: hidden;
