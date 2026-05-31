@@ -3,19 +3,17 @@ import './AccountsScreen.css'
 const ACCOUNTS = [
   {
     id: 'chase-checking',
-    bankName: 'Chase',
-    accountType: 'Checking',
+    label: 'Chase Checking',
     lastFour: '4821',
     balance: 612.5,
     accentColor: '#117ACA',
   },
   {
     id: 'campus-savings',
-    bankName: 'Campus Job',
-    accountType: 'Savings',
+    label: 'Campus Job Savings',
     lastFour: '2290',
     balance: 230.0,
-    accentColor: '#2D4A3E',
+    accentColor: '#3F9B6B',
   },
 ]
 
@@ -45,12 +43,11 @@ function AccountCard({ account }) {
     >
       <div className="account-card-body">
         <div className="account-card-top">
-          <p className="account-bank-name">{account.bankName}</p>
+          <p className="account-label">
+            {account.label} ••{account.lastFour}
+          </p>
           <p className="account-balance">{formatBalance(account.balance)}</p>
         </div>
-        <p className="account-meta">
-          {account.accountType} ••{account.lastFour}
-        </p>
       </div>
     </article>
   )
@@ -97,7 +94,7 @@ function AccountsScreen({ onNavigate, appData }) {
         <button
           type="button"
           className="add-account-button"
-          onClick={() => onNavigate?.('add-account')}
+          onClick={() => onNavigate?.('addaccount')}
         >
           + Add Account
         </button>

@@ -34,12 +34,11 @@ const SCREENS = {
   log: LogScreen,
   budgets: BudgetsScreen,
   assistant: AssistantScreen,
+  accounts: AccountsScreen,
+  addaccount: AddAccountScreen,
 }
 
-const STACK_SCREENS = {
-  accounts: AccountsScreen,
-  'add-account': AddAccountScreen,
-}
+const OVERLAY_SCREENS = new Set(['accounts', 'addaccount'])
 
 const INITIAL_APP_DATA = {
   balance: 842.50,
@@ -61,25 +60,16 @@ const INITIAL_APP_DATA = {
 
 function App() {
   const [activeTab, setActiveTab] = useState('home')
-  const [stackScreen, setStackScreen] = useState(null)
   const [appData, setAppData] = useState(INITIAL_APP_DATA)
   const [budgetCategory, setBudgetCategory] = useState('Food & Dining')
   const [toast, setToast] = useState(null)
   const ActiveScreen = SCREENS[activeTab]
-  const StackScreen = stackScreen ? STACK_SCREENS[stackScreen] : null
-  const CurrentScreen = StackScreen ?? ActiveScreen
 
   function handleNavigate(tab, options = {}) {
     if (options.budgetCategory) {
       setBudgetCategory(options.budgetCategory)
     }
 
-    if (tab === 'accounts' || tab === 'add-account') {
-      setStackScreen(tab)
-      return
-    }
-
-    setStackScreen(null)
     setActiveTab(tab)
   }
 
@@ -138,9 +128,9 @@ function App() {
   return (
     <div className="app">
       <main className="app-main">
-        <div key={stackScreen ?? activeTab} className="screen-fade-in">
-          {CurrentScreen ? (
-            <CurrentScreen
+        <div key={activeTab} className="screen-fade-in">
+          {ActiveScreen ? (
+            <ActiveScreen
               onNavigate={handleNavigate}
               appData={appData}
               addTransaction={addTransaction}
@@ -163,11 +153,11 @@ function App() {
       ) : null}
 
       <nav
-        className={['tab-bar', stackScreen ? 'tab-bar--hidden' : '']
+        className={['tab-bar', OVERLAY_SCREENS.has(activeTab) ? 'tab-bar--hidden' : '']
           .filter(Boolean)
           .join(' ')}
         aria-label="Main navigation"
-        aria-hidden={stackScreen ? 'true' : undefined}
+        aria-hidden={OVERLAY_SCREENS.has(activeTab) ? 'true' : undefined}
       >
         {TABS.map((tab) => {
           const Icon = TAB_ICONS[tab.id]

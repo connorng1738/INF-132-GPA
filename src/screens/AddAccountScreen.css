@@ -132,6 +132,7 @@
 
 .unlinked-account-button {
   width: 100%;
+  margin-top: auto;
   padding: calc(var(--font-size-body) * 1.067);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 24%, transparent);
   border-radius: var(--radius-button);

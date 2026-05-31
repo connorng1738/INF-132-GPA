@@ -113,13 +113,12 @@
 
 .account-card-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: calc(var(--font-size-body) * 0.8);
-  margin-bottom: calc(var(--font-size-body) * 0.4);
 }
 
-.account-bank-name {
+.account-label {
   margin: 0;
   font-size: calc(var(--font-size-body) * 1.067);
   font-weight: 700;
@@ -132,12 +131,6 @@
   font-weight: 700;
   color: var(--color-text-primary);
   flex-shrink: 0;
-}
-
-.account-meta {
-  margin: 0;
-  font-size: calc(var(--font-size-body) * 0.933);
-  color: var(--color-text-secondary);
 }
 
 .accounts-footer {

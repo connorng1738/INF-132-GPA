@@ -12,7 +12,7 @@ const POPULAR_BANKS = [
   {
     id: 'capital-one',
     name: 'Capital One',
-    background: '#004B63',
+    background: '#004977',
     color: '#FFFFFF',
     border: 'transparent',
   },
@@ -26,7 +26,7 @@ const POPULAR_BANKS = [
   {
     id: 'wells-fargo',
     name: 'Wells Fargo',
-    background: '#D71E28',
+    background: '#CC0000',
     color: '#FFFFFF',
     border: 'transparent',
   },
@@ -40,21 +40,21 @@ const POPULAR_BANKS = [
   {
     id: 'discover',
     name: 'Discover',
-    background: '#F5F5F5',
+    background: '#F0F0F0',
     color: '#1A1A1A',
     border: 'color-mix(in srgb, var(--color-text-secondary) 24%, transparent)',
   },
   {
     id: 'ally',
     name: 'Ally',
-    background: '#650081',
+    background: '#6D1F7A',
     color: '#FFFFFF',
     border: 'transparent',
   },
   {
     id: 'apple',
     name: 'Apple',
-    background: '#FFFFFF',
+    background: '#F5F5F5',
     color: '#1A1A1A',
     border: 'color-mix(in srgb, var(--color-text-secondary) 24%, transparent)',
   },
@@ -73,7 +73,7 @@ function CloseIcon() {
   )
 }
 
-function AddAccountScreen({ onNavigate, showToast }) {
+function AddAccountScreen({ onNavigate }) {
   const [searchQuery, setSearchQuery] = useState('')
 
   const filteredBanks = POPULAR_BANKS.filter((bank) =>
@@ -81,7 +81,7 @@ function AddAccountScreen({ onNavigate, showToast }) {
   )
 
   function handleBankSelect() {
-    showToast?.('Account connected!')
+    window.alert('Account connected!')
     onNavigate?.('accounts')
   }
 
@@ -134,12 +134,6 @@ function AddAccountScreen({ onNavigate, showToast }) {
             ))}
           </div>
         </section>
-
-        <div className="add-account-divider" aria-hidden="true">
-          <span className="add-account-divider-line" />
-          <span className="add-account-divider-text">or</span>
-          <span className="add-account-divider-line" />
-        </div>
 
         <button type="button" className="unlinked-account-button">
           Add an Unlinked Account
