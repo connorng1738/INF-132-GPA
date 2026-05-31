@@ -9,7 +9,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: calc(var(--font-size-body) * 1.333);
+  gap: calc(var(--font-size-body) * 1.2);
   min-height: 0;
   min-width: 0;
   overflow-y: auto;
@@ -25,7 +25,7 @@
 .add-account-title {
   grid-column: 2;
   margin: 0;
-  font-size: calc(var(--font-size-body) * 1.067);
+  font-size: calc(var(--font-size-body) * 1.2);
   font-weight: 700;
   text-align: center;
   color: var(--color-text-primary);
@@ -42,31 +42,29 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--color-text-primary);
+  color: #117ACA;
   cursor: pointer;
   transition: opacity 150ms ease, transform 150ms ease;
 }
 
 .add-account-close svg {
-  width: calc(var(--font-size-body) * 1.2);
-  height: calc(var(--font-size-body) * 1.2);
+  width: calc(var(--font-size-body) * 1.333);
+  height: calc(var(--font-size-body) * 1.333);
 }
 
 .add-account-search-label {
   display: block;
   margin-bottom: calc(var(--font-size-body) * 0.667);
-  font-size: var(--font-size-section-label);
+  font-size: calc(var(--font-size-body) * 0.933);
   font-weight: 600;
-  letter-spacing: var(--letter-spacing-section-label);
-  text-transform: var(--text-transform-section-label);
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
 }
 
 .add-account-search-input {
   width: 100%;
-  padding: calc(var(--font-size-body) * 0.933) calc(var(--font-size-body) * 1.067);
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
-  border-radius: var(--radius-button);
+  padding: calc(var(--font-size-body) * 1) calc(var(--font-size-body) * 1.2);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
+  border-radius: var(--radius-pill);
   background: var(--color-card-background);
   color: var(--color-text-primary);
   font-size: var(--font-size-body);
@@ -77,32 +75,36 @@
   color: var(--color-text-secondary);
 }
 
-.popular-options-label {
-  margin: 0 0 calc(var(--font-size-body) * 0.8);
-  font-size: var(--font-size-section-label);
-  font-weight: 600;
-  letter-spacing: var(--letter-spacing-section-label);
-  text-transform: var(--text-transform-section-label);
+.add-account-search-help {
+  margin: calc(var(--font-size-body) * 0.533) 0 0;
+  font-size: calc(var(--font-size-body) * 0.867);
   color: var(--color-text-secondary);
+}
+
+.popular-options-heading {
+  margin: 0 0 calc(var(--font-size-body) * 0.933);
+  font-size: calc(var(--font-size-body) * 1.067);
+  font-weight: 700;
+  color: var(--color-text-primary);
 }
 
 .popular-banks-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: calc(var(--font-size-body) * 0.667);
+  gap: calc(var(--font-size-body) * 0.8);
 }
 
 .popular-bank-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(var(--font-size-body) * 3.2);
-  padding: calc(var(--font-size-body) * 0.8);
+  min-height: calc(var(--font-size-body) * 4.267);
+  padding: calc(var(--font-size-body) * 0.933);
   border: 1px solid var(--bank-border);
-  border-radius: var(--radius-button);
+  border-radius: calc(var(--radius-button) * 1.1);
   background: var(--bank-background);
   color: var(--bank-color);
-  font-size: calc(var(--font-size-body) * 0.933);
+  font-size: calc(var(--font-size-body) * 1.067);
   font-weight: 700;
   line-height: 1.25;
   text-align: center;
@@ -132,12 +134,11 @@
 
 .unlinked-account-button {
   width: 100%;
-  margin-top: auto;
   padding: calc(var(--font-size-body) * 1.067);
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 24%, transparent);
-  border-radius: var(--radius-button);
-  background: var(--color-card-background);
-  color: var(--color-text-primary);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, #117ACA 12%, var(--color-card-background));
+  color: #117ACA;
   font-size: var(--font-size-body);
   font-weight: 700;
   cursor: pointer;
@@ -157,7 +158,7 @@
   }
 
   .unlinked-account-button:hover {
-    background: color-mix(in srgb, var(--color-text-secondary) 6%, var(--color-card-background));
+    background: color-mix(in srgb, #117ACA 18%, var(--color-card-background));
   }
 }
 

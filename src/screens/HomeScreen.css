@@ -62,13 +62,86 @@
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
+.balance-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--font-size-body) * 0.667);
+  margin-bottom: calc(var(--font-size-body) * 0.8);
+}
+
 .balance-label {
-  margin: 0 0 calc(var(--font-size-body) * 0.8);
+  margin: 0;
   font-size: var(--font-size-section-label);
   font-weight: 600;
   letter-spacing: var(--letter-spacing-section-label);
   text-transform: var(--text-transform-section-label);
   color: color-mix(in srgb, var(--color-card-background) 75%, transparent);
+}
+
+.balance-view-link {
+  font-size: calc(var(--font-size-body) * 0.867);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-card-background) 92%, transparent);
+  white-space: nowrap;
+}
+
+.accounts-entry-card {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--font-size-body) * 0.933);
+  width: 100%;
+  padding: calc(var(--font-size-body) * 1.067) calc(var(--font-size-body) * 1.2);
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-background);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.accounts-entry-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--font-size-body) * 2.667);
+  height: calc(var(--font-size-body) * 2.667);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-primary-dark) 12%, var(--color-card-background));
+  color: var(--color-primary-dark);
+  flex-shrink: 0;
+}
+
+.accounts-entry-icon svg {
+  width: calc(var(--font-size-body) * 1.2);
+  height: calc(var(--font-size-body) * 1.2);
+}
+
+.accounts-entry-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: calc(var(--font-size-section-label) * 0.33);
+  min-width: 0;
+}
+
+.accounts-entry-title {
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.accounts-entry-subtitle {
+  font-size: calc(var(--font-size-body) * 0.867);
+  color: var(--color-text-secondary);
+}
+
+.accounts-entry-chevron {
+  font-size: calc(var(--font-size-body) * 1.6);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
 }
 
 .balance-amount {
@@ -185,8 +258,8 @@
 
 .quick-actions {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: calc(var(--font-size-body) * 0.667);
+  grid-template-columns: repeat(5, 1fr);
+  gap: calc(var(--font-size-body) * 0.533);
 }
 
 .quick-action {
@@ -326,9 +399,20 @@
     color: var(--color-primary-dark);
     transform: scale(1.02);
   }
+
+  .accounts-entry-card:hover {
+    transform: scale(1.01);
+    box-shadow:
+      0 calc(var(--font-size-body) * 0.27) calc(var(--font-size-body) * 0.8)
+        color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+  }
 }
 
 .balance-card:active {
+  transform: scale(0.99);
+}
+
+.accounts-entry-card:active {
   transform: scale(0.99);
 }
 

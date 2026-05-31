@@ -1,4 +1,5 @@
 import {
+  AccountsIcon,
   AssistantIcon,
   BudgetsIcon,
   PlusIcon,
@@ -14,6 +15,7 @@ const WEEKLY_BUDGET_PROGRESS =
 const QUICK_ACTION_TABS = {
   log: 'log',
   spending: 'spending',
+  accounts: 'accounts',
   budgets: 'budgets',
   'ask-ai': 'assistant',
 }
@@ -21,6 +23,7 @@ const QUICK_ACTION_TABS = {
 const QUICK_ACTIONS = [
   { id: 'log', label: 'Log', Icon: PlusIcon },
   { id: 'spending', label: 'Spending', Icon: SpendingIcon },
+  { id: 'accounts', label: 'Accounts', Icon: AccountsIcon },
   { id: 'budgets', label: 'Budgets', Icon: BudgetsIcon },
   { id: 'ask-ai', label: 'Ask AI', Icon: AssistantIcon },
 ]
@@ -143,7 +146,10 @@ function HomeScreen({ onNavigate, appData }) {
         aria-label={`Available balance $${balance.toFixed(2)}. View accounts.`}
         onClick={() => onNavigate?.('accounts')}
       >
-        <p className="balance-label">Available balance</p>
+        <div className="balance-card-top">
+          <p className="balance-label">Available balance</p>
+          <span className="balance-view-link">View accounts →</span>
+        </div>
         <div className="balance-amount" aria-hidden="true">
           <span className="balance-currency">$</span>
           <span className="balance-dollars">{dollars}</span>
@@ -155,6 +161,25 @@ function HomeScreen({ onNavigate, appData }) {
           </span>
           +$312.40 from campus job today
         </p>
+      </button>
+
+      <button
+        type="button"
+        className="accounts-entry-card"
+        onClick={() => onNavigate?.('accounts')}
+      >
+        <span className="accounts-entry-icon" aria-hidden="true">
+          <AccountsIcon />
+        </span>
+        <span className="accounts-entry-text">
+          <span className="accounts-entry-title">Accounts</span>
+          <span className="accounts-entry-subtitle">
+            2 connected · Net worth ${balance.toFixed(2)}
+          </span>
+        </span>
+        <span className="accounts-entry-chevron" aria-hidden="true">
+          ›
+        </span>
       </button>
 
       <section className="weekly-budget-card" aria-label="Weekly budget">

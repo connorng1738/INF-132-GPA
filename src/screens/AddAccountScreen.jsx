@@ -42,7 +42,7 @@ const POPULAR_BANKS = [
     name: 'Discover',
     background: '#F0F0F0',
     color: '#1A1A1A',
-    border: 'color-mix(in srgb, var(--color-text-secondary) 24%, transparent)',
+    border: 'color-mix(in srgb, var(--color-text-secondary) 20%, transparent)',
   },
   {
     id: 'ally',
@@ -56,7 +56,7 @@ const POPULAR_BANKS = [
     name: 'Apple',
     background: '#F5F5F5',
     color: '#1A1A1A',
-    border: 'color-mix(in srgb, var(--color-text-secondary) 24%, transparent)',
+    border: 'color-mix(in srgb, var(--color-text-secondary) 20%, transparent)',
   },
 ]
 
@@ -73,7 +73,7 @@ function CloseIcon() {
   )
 }
 
-function AddAccountScreen({ onNavigate }) {
+function AddAccountScreen({ onNavigate, showToast }) {
   const [searchQuery, setSearchQuery] = useState('')
 
   const filteredBanks = POPULAR_BANKS.filter((bank) =>
@@ -81,7 +81,7 @@ function AddAccountScreen({ onNavigate }) {
   )
 
   function handleBankSelect() {
-    window.alert('Account connected!')
+    showToast?.('Account connected!')
     onNavigate?.('accounts')
   }
 
@@ -89,7 +89,7 @@ function AddAccountScreen({ onNavigate }) {
     <div className="add-account-screen">
       <div className="add-account-content">
         <header className="add-account-header">
-          <h1 className="add-account-title">Add Account</h1>
+          <h1 className="add-account-title">Add Accounts</h1>
           <button
             type="button"
             className="add-account-close"
@@ -112,10 +112,13 @@ function AddAccountScreen({ onNavigate }) {
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
           />
+          <p className="add-account-search-help">
+            Search by institution name or web address (URL)
+          </p>
         </section>
 
         <section className="popular-options-section" aria-label="Popular bank options">
-          <p className="popular-options-label">Popular Options</p>
+          <h2 className="popular-options-heading">Popular Options</h2>
           <div className="popular-banks-grid">
             {filteredBanks.map((bank) => (
               <button
@@ -134,6 +137,12 @@ function AddAccountScreen({ onNavigate }) {
             ))}
           </div>
         </section>
+
+        <div className="add-account-divider" aria-hidden="true">
+          <span className="add-account-divider-line" />
+          <span className="add-account-divider-text">or</span>
+          <span className="add-account-divider-line" />
+        </div>
 
         <button type="button" className="unlinked-account-button">
           Add an Unlinked Account
