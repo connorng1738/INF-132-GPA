@@ -41,20 +41,20 @@ const SCREENS = {
 const OVERLAY_SCREENS = new Set(['accounts', 'addaccount'])
 
 const INITIAL_APP_DATA = {
-  balance: 842.50,
-  weeklySpent: 102,
-  weeklyLimit: 175,
+  balance: 500.0,
+  weeklySpent: 52,
+  weeklyLimit: 85,
   categories: [
-    { id: 'food', name: 'Food & Dining', emoji: '🥪', spent: 96, limit: 150 },
-    { id: 'groceries', name: 'Groceries', emoji: '🛒', spent: 142, limit: 200 },
-    { id: 'entertainment', name: 'Entertainment', emoji: '🎟️', spent: 58, limit: 80 },
-    { id: 'transport', name: 'Transport', emoji: '🚗', spent: 34, limit: 60 },
-    { id: 'subscriptions', name: 'Subscriptions', emoji: '🎧', spent: 23, limit: 30 },
+    { id: 'food', name: 'Food & Dining', emoji: '🥪', spent: 55, limit: 80 },
+    { id: 'groceries', name: 'Groceries', emoji: '🛒', spent: 78, limit: 110 },
+    { id: 'entertainment', name: 'Entertainment', emoji: '🎟️', spent: 22, limit: 45 },
+    { id: 'transport', name: 'Transport', emoji: '🚗', spent: 18, limit: 30 },
+    { id: 'subscriptions', name: 'Subscriptions', emoji: '🎧', spent: 12, limit: 18 },
   ],
   transactions: [
-    { id: 1, name: 'Campus job deposit', amount: 312.40, type: 'income', category: 'Income', date: 'Today' },
-    { id: 2, name: 'Trader Joe\'s', amount: -28.40, type: 'expense', category: 'Groceries', date: 'Today' },
-    { id: 3, name: 'Blue Bottle Coffee', amount: -5.75, type: 'expense', category: 'Food & Dining', date: 'Yesterday' },
+    { id: 1, name: 'Campus job deposit', amount: 180.0, type: 'income', category: 'Income', date: 'Today' },
+    { id: 2, name: 'Trader Joe\'s', amount: -22.4, type: 'expense', category: 'Groceries', date: 'Today' },
+    { id: 3, name: 'Blue Bottle Coffee', amount: -4.75, type: 'expense', category: 'Food & Dining', date: 'Yesterday' },
   ],
 }
 

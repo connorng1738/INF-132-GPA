@@ -7,8 +7,8 @@ import {
 } from '../icons.jsx'
 import './HomeScreen.css'
 
-const WEEKLY_BUDGET_TOTAL = 175
-const WEEKLY_BUDGET_REMAINING = 73
+const WEEKLY_BUDGET_TOTAL = 85
+const WEEKLY_BUDGET_REMAINING = 33
 const WEEKLY_BUDGET_PROGRESS =
   ((WEEKLY_BUDGET_TOTAL - WEEKLY_BUDGET_REMAINING) / WEEKLY_BUDGET_TOTAL) * 100
 
@@ -34,21 +34,21 @@ const UPCOMING_BILLS = [
     emoji: '🏠',
     title: 'Rent — shared apt',
     subtitle: 'Due in 6 days',
-    amount: '$685.00',
+    amount: '$225.00',
   },
   {
     id: 'phone',
     emoji: '📱',
     title: 'Phone (Mint)',
     subtitle: 'Due in 9 days',
-    amount: '$15.00',
+    amount: '$12.00',
   },
   {
     id: 'utilities',
     emoji: '💡',
     title: 'Utilities split',
     subtitle: 'Due in 12 days',
-    amount: '$47.00',
+    amount: '$18.00',
   },
 ]
 
@@ -159,7 +159,7 @@ function HomeScreen({ onNavigate, appData }) {
           <span className="balance-subtext-arrow" aria-hidden="true">
             ↗
           </span>
-          +$312.40 from campus job today
+          +$180.00 from campus job today
         </p>
       </button>
 
@@ -234,7 +234,7 @@ function HomeScreen({ onNavigate, appData }) {
       <section aria-label="Upcoming bills">
         <div className="section-header">
           <h2 className="section-title">Upcoming bills</h2>
-          <p className="section-total">$753.99 total</p>
+          <p className="section-total">$255.00 total</p>
         </div>
         <ListCard items={UPCOMING_BILLS} />
       </section>

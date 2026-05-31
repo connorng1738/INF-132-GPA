@@ -17,15 +17,15 @@ const PERIOD_VIEWS = {
       { id: 'sun', label: 'Sun 5/18', height: '100%', current: true },
     ],
     categories: [
-      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 38, limit: 50 },
-      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 28, limit: 38 },
-      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 18, limit: 20 },
-      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 10, limit: 12 },
-      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 6, limit: 8 },
+      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 14, limit: 20 },
+      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 10, limit: 14 },
+      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 5, limit: 8 },
+      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 4, limit: 5 },
+      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 2, limit: 3 },
     ],
     getTotals: (appData) => ({
-      spent: appData?.weeklySpent ?? 102,
-      budget: appData?.weeklyLimit ?? 175,
+      spent: appData?.weeklySpent ?? 52,
+      budget: appData?.weeklyLimit ?? 85,
     }),
   },
   Month: {
@@ -64,25 +64,25 @@ const PERIOD_VIEWS = {
       { id: 'june', label: 'June', height: '18%', current: true, starting: true },
     ],
     categories: [
-      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 380, limit: 600 },
-      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 290, limit: 450 },
-      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 142, limit: 240 },
-      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 89, limit: 180 },
-      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 69, limit: 90 },
+      { id: 'groceries', emoji: '🛒', name: 'Groceries', spent: 168, limit: 260 },
+      { id: 'food', emoji: '🥪', name: 'Food & Dining', spent: 128, limit: 195 },
+      { id: 'entertainment', emoji: '🎟️', name: 'Entertainment', spent: 62, limit: 105 },
+      { id: 'transport', emoji: '🚗', name: 'Transport', spent: 39, limit: 78 },
+      { id: 'subscriptions', emoji: '🎧', name: 'Subscriptions', spent: 30, limit: 39 },
     ],
     getTotals: () => ({
-      spent: 1847,
-      budget: 3200,
+      spent: 920,
+      budget: 1500,
     }),
   },
 }
 
 const MONTH_FALLBACK_CATEGORIES = [
-  { id: 'food', name: 'Food & Dining', emoji: '🥪', spent: 96, limit: 150 },
-  { id: 'groceries', name: 'Groceries', emoji: '🛒', spent: 142, limit: 200 },
-  { id: 'entertainment', name: 'Entertainment', emoji: '🎟️', spent: 58, limit: 80 },
-  { id: 'transport', name: 'Transport', emoji: '🚗', spent: 34, limit: 60 },
-  { id: 'subscriptions', name: 'Subscriptions', emoji: '🎧', spent: 23, limit: 30 },
+  { id: 'food', name: 'Food & Dining', emoji: '🥪', spent: 55, limit: 80 },
+  { id: 'groceries', name: 'Groceries', emoji: '🛒', spent: 78, limit: 110 },
+  { id: 'entertainment', name: 'Entertainment', emoji: '🎟️', spent: 22, limit: 45 },
+  { id: 'transport', name: 'Transport', emoji: '🚗', spent: 18, limit: 30 },
+  { id: 'subscriptions', name: 'Subscriptions', emoji: '🎧', spent: 12, limit: 18 },
 ]
 
 function BackArrowIcon() {

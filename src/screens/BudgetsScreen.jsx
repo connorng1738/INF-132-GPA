@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import './BudgetsScreen.css'
 
-const PRESET_LIMITS = [100, 150, 200, 250]
+const PRESET_LIMITS = [40, 60, 80, 100]
 
 const CATEGORY_CONFIG = [
-  { id: 'food', name: 'Food & Dining', defaultLimit: 150, defaultSpent: 96 },
-  { id: 'groceries', name: 'Groceries', defaultLimit: 200, defaultSpent: 142 },
-  { id: 'entertainment', name: 'Entertainment', defaultLimit: 80, defaultSpent: 58 },
-  { id: 'transport', name: 'Transport', defaultLimit: 60, defaultSpent: 34 },
-  { id: 'subscriptions', name: 'Subscriptions', defaultLimit: 30, defaultSpent: 23 },
-  { id: 'bills', name: 'Bills', defaultLimit: 100, defaultSpent: 47 },
+  { id: 'food', name: 'Food & Dining', defaultLimit: 80, defaultSpent: 55 },
+  { id: 'groceries', name: 'Groceries', defaultLimit: 110, defaultSpent: 78 },
+  { id: 'entertainment', name: 'Entertainment', defaultLimit: 45, defaultSpent: 22 },
+  { id: 'transport', name: 'Transport', defaultLimit: 30, defaultSpent: 18 },
+  { id: 'subscriptions', name: 'Subscriptions', defaultLimit: 18, defaultSpent: 12 },
+  { id: 'bills', name: 'Bills', defaultLimit: 55, defaultSpent: 28 },
 ]
 
 function BackArrowIcon() {
@@ -32,7 +32,7 @@ function getCategoryBudget(categoryName, appData) {
     (item) => item.id === config?.id || item.name === categoryName,
   )
 
-  const limit = fromApp?.limit ?? config?.defaultLimit ?? 150
+  const limit = fromApp?.limit ?? config?.defaultLimit ?? 80
   const spent = fromApp?.spent ?? config?.defaultSpent ?? 0
   const percent = Math.round((spent / limit) * 100)
   const remaining = limit - spent
@@ -57,7 +57,7 @@ function BudgetsScreen({
   const [selectedCategory, setSelectedCategory] = useState(
     budgetCategory ?? 'Food & Dining',
   )
-  const [selectedPreset, setSelectedPreset] = useState(150)
+  const [selectedPreset, setSelectedPreset] = useState(80)
 
   const categoryBudget = getCategoryBudget(selectedCategory, appData)
 

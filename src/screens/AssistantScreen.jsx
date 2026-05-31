@@ -12,29 +12,29 @@ const INITIAL_MESSAGES = [
 ]
 
 const BUDGET_ROWS = [
-  { label: 'Weekly budget left', value: '$73', negative: false },
-  { label: 'Concert ticket', value: '−$120', negative: true },
+  { label: 'Weekly budget left', value: '$33', negative: false },
+  { label: 'Concert ticket', value: '−$80', negative: true },
   { label: 'After purchase', value: '−$47', negative: true },
 ]
 
 const CONTEXT_ROWS = [
-  { label: 'Entertainment this month', value: '$58 of $80', negative: false },
-  { label: 'Upcoming bills (next 14d)', value: '$1042', negative: false },
-  { label: 'Available after bills', value: '$-200', negative: false },
+  { label: 'Entertainment this month', value: '$22 of $45', negative: false },
+  { label: 'Upcoming bills (next 14d)', value: '$255', negative: false },
+  { label: 'Available after bills', value: '$245', negative: false },
 ]
 
 const REALLOCATION_ROWS = [
-  { label: 'Entertainment budget left', value: '$22', negative: false },
-  { label: 'Still needed', value: '$58', negative: true },
+  { label: 'Entertainment budget left', value: '$23', negative: false },
+  { label: 'Still needed', value: '$57', negative: true },
   { label: 'Concert ticket', value: '$80', negative: false },
 ]
 
 const AFTER_REALLOCATION_ROWS = [
-  { label: 'Food & Dining', value: '$96/$120 (adjusted)', negative: false },
-  { label: 'Groceries', value: '$142/$172 (adjusted)', negative: false },
+  { label: 'Food & Dining', value: '$55/$55 (adjusted)', negative: false },
+  { label: 'Groceries', value: '$78/$78 (adjusted)', negative: false },
   {
     label: 'Entertainment',
-    value: '$58/$102 (covered ✓)',
+    value: '$22/$102 (covered ✓)',
     negative: false,
     positive: true,
   },
@@ -60,11 +60,19 @@ function isConcertAffordabilityQuery(text) {
     return true
   }
 
+  if (normalized.includes('$80 concert')) {
+    return true
+  }
+
   if (normalized.includes('$120 concert')) {
     return true
   }
 
   if (normalized.includes('can i afford') && normalized.includes('concert')) {
+    return true
+  }
+
+  if (normalized.includes('$80') && normalized.includes('concert')) {
     return true
   }
 
@@ -173,8 +181,8 @@ function ReallocationResponseCard() {
         <div className="suggestion-box">
           <p className="suggestion-label">Suggestion</p>
           <p className="suggestion-text">
-            Move $30 from Food &amp; Dining (you have $54 left) and $28 from
-            Groceries (you have $58 left) into Entertainment. That covers the
+            Move $25 from Food &amp; Dining (you have $25 left) and $32 from
+            Groceries (you have $32 left) into Entertainment. That covers the
             ticket and keeps all your other categories in the green.
           </p>
         </div>
@@ -206,7 +214,7 @@ function ConcertResponseCard() {
         </h2>
 
         <p className="ai-card-text">
-          A $120 ticket would put you $47 over your weekly budget and use up
+          A $80 ticket would put you $47 over your weekly budget and use up
           most of the cushion you&apos;d normally have for groceries before rent
           hits.
         </p>
@@ -226,7 +234,7 @@ function ConcertResponseCard() {
         <div className="suggestion-box">
           <p className="suggestion-label">Suggestion</p>
           <p className="suggestion-text">
-            If you skip eating out twice this week (~$25) and use the $58 left
+            If you skip eating out twice this week (~$12) and use the $23 left
             in your entertainment budget, you could cover the ticket without
             dipping into rent money.
           </p>
@@ -259,7 +267,7 @@ function GenericResponseCard() {
 
         <p className="ai-card-text">
           I can help you think through purchases like concert tickets, groceries,
-          or bills. Try asking something like &ldquo;Can I afford a $120 concert
+          or bills. Try asking something like &ldquo;Can I afford an $80 concert
           ticket this weekend?&rdquo;
         </p>
       </div>
