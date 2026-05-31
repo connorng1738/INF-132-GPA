@@ -116,7 +116,9 @@ body {
 .spending-screen,
 .assistant-content,
 .log-content,
-.budgets-content {
+.budgets-content,
+.accounts-content,
+.add-account-content {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE */
 }
@@ -125,7 +127,9 @@ body {
 .spending-screen::-webkit-scrollbar,
 .assistant-content::-webkit-scrollbar,
 .log-content::-webkit-scrollbar,
-.budgets-content::-webkit-scrollbar {
+.budgets-content::-webkit-scrollbar,
+.accounts-content::-webkit-scrollbar,
+.add-account-content::-webkit-scrollbar {
   display: none;
 }
 
@@ -191,6 +195,10 @@ body {
   padding: calc(var(--font-size-section-label) * 0.67) calc(var(--font-size-section-label) * 0.67) calc(var(--font-size-body) * 1.6);
   background: var(--color-card-background);
   border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+}
+
+.tab-bar--hidden {
+  display: none;
 }
 
 .tab-bar-item {

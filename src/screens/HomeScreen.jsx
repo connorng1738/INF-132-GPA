@@ -140,8 +140,8 @@ function HomeScreen({ onNavigate, appData }) {
       <button
         type="button"
         className="balance-card"
-        aria-label={`Available balance $${balance.toFixed(2)}. View spending.`}
-        onClick={() => onNavigate?.('spending')}
+        aria-label={`Available balance $${balance.toFixed(2)}. View accounts.`}
+        onClick={() => onNavigate?.('accounts')}
       >
         <p className="balance-label">Available balance</p>
         <div className="balance-amount" aria-hidden="true">

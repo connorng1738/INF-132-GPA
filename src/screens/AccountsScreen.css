@@ -1,0 +1,177 @@
+.accounts-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.accounts-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: calc(var(--font-size-body) * 1.6);
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  padding-bottom: calc(var(--font-size-body) * 1.333);
+}
+
+.accounts-header {
+  display: grid;
+  grid-template-columns: calc(var(--font-size-body) * 2) 1fr calc(var(--font-size-body) * 2);
+  align-items: center;
+}
+
+.accounts-back {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: calc(var(--font-size-body) * 2);
+  height: calc(var(--font-size-body) * 2);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.accounts-back svg {
+  width: calc(var(--font-size-body) * 1.333);
+  height: calc(var(--font-size-body) * 1.333);
+}
+
+.accounts-title {
+  margin: 0;
+  font-size: calc(var(--font-size-body) * 1.067);
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.net-worth-section {
+  text-align: center;
+}
+
+.net-worth-label {
+  margin: 0 0 calc(var(--font-size-body) * 0.533);
+  font-size: var(--font-size-section-label);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-section-label);
+  text-transform: var(--text-transform-section-label);
+  color: var(--color-text-secondary);
+}
+
+.net-worth-amount {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-balance);
+  line-height: 1;
+}
+
+.net-worth-currency {
+  margin-top: calc(var(--font-size-body) * 0.4);
+  font-size: calc(var(--font-size-body) * 1.6);
+}
+
+.net-worth-dollars {
+  font-size: var(--font-size-balance);
+}
+
+.net-worth-cents {
+  margin-top: calc(var(--font-size-body) * 0.4);
+  font-size: calc(var(--font-size-body) * 1.6);
+}
+
+.accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--font-size-body) * 0.8);
+}
+
+.account-card {
+  display: flex;
+  border-radius: var(--radius-card);
+  background: var(--color-card-background);
+  overflow: hidden;
+}
+
+.account-card::before {
+  content: '';
+  flex-shrink: 0;
+  width: calc(var(--font-size-body) * 0.267);
+  background: var(--account-accent);
+}
+
+.account-card-body {
+  flex: 1;
+  min-width: 0;
+  padding: calc(var(--font-size-body) * 1.067) calc(var(--font-size-body) * 1.2);
+}
+
+.account-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--font-size-body) * 0.8);
+  margin-bottom: calc(var(--font-size-body) * 0.4);
+}
+
+.account-bank-name {
+  margin: 0;
+  font-size: calc(var(--font-size-body) * 1.067);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.account-balance {
+  margin: 0;
+  font-size: calc(var(--font-size-body) * 1.067);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  flex-shrink: 0;
+}
+
+.account-meta {
+  margin: 0;
+  font-size: calc(var(--font-size-body) * 0.933);
+  color: var(--color-text-secondary);
+}
+
+.accounts-footer {
+  flex-shrink: 0;
+  padding-top: calc(var(--font-size-body) * 1.333);
+}
+
+.add-account-button {
+  width: 100%;
+  padding: calc(var(--font-size-body) * 1.067);
+  border: none;
+  border-radius: var(--radius-button);
+  background: var(--color-primary-dark);
+  color: var(--color-card-background);
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+@media (hover: hover) {
+  .accounts-back:hover {
+    opacity: 0.7;
+  }
+
+  .add-account-button:hover {
+    transform: scale(1.02);
+    box-shadow:
+      0 calc(var(--font-size-body) * 0.27) calc(var(--font-size-body) * 0.8)
+        color-mix(in srgb, var(--color-primary-dark) 30%, transparent);
+  }
+}
+
+.accounts-back:active,
+.add-account-button:active {
+  transform: scale(0.98);
+}

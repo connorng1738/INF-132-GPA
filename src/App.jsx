@@ -4,6 +4,8 @@ import SpendingScreen from './screens/SpendingScreen.jsx'
 import BudgetsScreen from './screens/BudgetsScreen.jsx'
 import AssistantScreen from './screens/AssistantScreen.jsx'
 import LogScreen from './screens/LogScreen.jsx'
+import AccountsScreen from './screens/AccountsScreen.jsx'
+import AddAccountScreen from './screens/AddAccountScreen.jsx'
 import {
   AssistantIcon,
   BudgetsIcon,
@@ -34,6 +36,11 @@ const SCREENS = {
   assistant: AssistantScreen,
 }
 
+const STACK_SCREENS = {
+  accounts: AccountsScreen,
+  'add-account': AddAccountScreen,
+}
+
 const INITIAL_APP_DATA = {
   balance: 842.50,
   weeklySpent: 102,
@@ -54,15 +61,25 @@ const INITIAL_APP_DATA = {
 
 function App() {
   const [activeTab, setActiveTab] = useState('home')
+  const [stackScreen, setStackScreen] = useState(null)
   const [appData, setAppData] = useState(INITIAL_APP_DATA)
   const [budgetCategory, setBudgetCategory] = useState('Food & Dining')
   const [toast, setToast] = useState(null)
   const ActiveScreen = SCREENS[activeTab]
+  const StackScreen = stackScreen ? STACK_SCREENS[stackScreen] : null
+  const CurrentScreen = StackScreen ?? ActiveScreen
 
   function handleNavigate(tab, options = {}) {
     if (options.budgetCategory) {
       setBudgetCategory(options.budgetCategory)
     }
+
+    if (tab === 'accounts' || tab === 'add-account') {
+      setStackScreen(tab)
+      return
+    }
+
+    setStackScreen(null)
     setActiveTab(tab)
   }
 
@@ -121,9 +138,9 @@ function App() {
   return (
     <div className="app">
       <main className="app-main">
-        <div key={activeTab} className="screen-fade-in">
-          {ActiveScreen ? (
-            <ActiveScreen
+        <div key={stackScreen ?? activeTab} className="screen-fade-in">
+          {CurrentScreen ? (
+            <CurrentScreen
               onNavigate={handleNavigate}
               appData={appData}
               addTransaction={addTransaction}
@@ -145,7 +162,13 @@ function App() {
         </div>
       ) : null}
 
-      <nav className="tab-bar" aria-label="Main navigation">
+      <nav
+        className={['tab-bar', stackScreen ? 'tab-bar--hidden' : '']
+          .filter(Boolean)
+          .join(' ')}
+        aria-label="Main navigation"
+        aria-hidden={stackScreen ? 'true' : undefined}
+      >
         {TABS.map((tab) => {
           const Icon = TAB_ICONS[tab.id]
 
