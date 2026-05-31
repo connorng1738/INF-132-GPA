@@ -41,7 +41,7 @@ const SCREENS = {
 const OVERLAY_SCREENS = new Set(['accounts', 'addaccount'])
 
 const INITIAL_APP_DATA = {
-  balance: 500.0,
+  balance: 512.67,
   weeklySpent: 52,
   weeklyLimit: 85,
   categories: [

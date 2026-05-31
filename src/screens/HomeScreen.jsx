@@ -15,7 +15,6 @@ const WEEKLY_BUDGET_PROGRESS =
 const QUICK_ACTION_TABS = {
   log: 'log',
   spending: 'spending',
-  accounts: 'accounts',
   budgets: 'budgets',
   'ask-ai': 'assistant',
 }
@@ -23,7 +22,6 @@ const QUICK_ACTION_TABS = {
 const QUICK_ACTIONS = [
   { id: 'log', label: 'Log', Icon: PlusIcon },
   { id: 'spending', label: 'Spending', Icon: SpendingIcon },
-  { id: 'accounts', label: 'Accounts', Icon: AccountsIcon },
   { id: 'budgets', label: 'Budgets', Icon: BudgetsIcon },
   { id: 'ask-ai', label: 'Ask AI', Icon: AssistantIcon },
 ]

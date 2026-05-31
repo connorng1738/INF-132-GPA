@@ -5,14 +5,14 @@ const ACCOUNTS = [
     id: 'chase-checking',
     label: 'Chase Checking',
     lastFour: '4821',
-    balance: 340.0,
+    balance: 348.67,
     accentColor: '#117ACA',
   },
   {
     id: 'campus-savings',
     label: 'Campus Job Savings',
     lastFour: '2290',
-    balance: 160.0,
+    balance: 164.0,
     accentColor: '#3F9B6B',
   },
 ]
@@ -54,7 +54,7 @@ function AccountCard({ account }) {
 }
 
 function AccountsScreen({ onNavigate, appData }) {
-  const netWorth = appData?.balance ?? 500
+  const netWorth = appData?.balance ?? 512.67
   const [dollars, cents] = netWorth.toFixed(2).split('.')
 
   return (

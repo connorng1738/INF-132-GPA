@@ -258,8 +258,8 @@
 
 .quick-actions {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: calc(var(--font-size-body) * 0.533);
+  grid-template-columns: repeat(4, 1fr);
+  gap: calc(var(--font-size-body) * 0.667);
 }
 
 .quick-action {

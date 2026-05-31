@@ -20,7 +20,7 @@ const BUDGET_ROWS = [
 const CONTEXT_ROWS = [
   { label: 'Entertainment this month', value: '$22 of $45', negative: false },
   { label: 'Upcoming bills (next 14d)', value: '$255', negative: false },
-  { label: 'Available after bills', value: '$245', negative: false },
+  { label: 'Available after bills', value: '$258', negative: false },
 ]
 
 const REALLOCATION_ROWS = [
