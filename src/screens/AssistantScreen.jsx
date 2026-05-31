@@ -270,13 +270,15 @@ function GenericResponseCard() {
 function AssistantScreen({ onNavigate }) {
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState(INITIAL_MESSAGES)
-  const contentRef = useRef(null)
+  const messagesEndRef = useRef(null)
 
   useEffect(() => {
-    const container = contentRef.current
-    if (container) {
-      container.scrollTop = container.scrollHeight
+    const scrollToLatest = () => {
+      messagesEndRef.current?.scrollIntoView({ block: 'end' })
     }
+
+    scrollToLatest()
+    window.requestAnimationFrame(scrollToLatest)
   }, [messages])
 
   function handleSubmit(event) {
@@ -327,24 +329,24 @@ function AssistantScreen({ onNavigate }) {
 
   return (
     <div className="assistant-screen">
-      <div className="assistant-content" ref={contentRef}>
-        <header className="assistant-header">
-          <button
-            type="button"
-            className="assistant-back"
-            aria-label="Go back to Home"
-            onClick={() => onNavigate?.('home')}
-          >
-            <BackArrowIcon />
-          </button>
-          <h1 className="assistant-title">
-            <span className="assistant-title-icon" aria-hidden="true">
-              <SparkleIcon />
-            </span>
-            Budget assistant
-          </h1>
-        </header>
+      <header className="assistant-header">
+        <button
+          type="button"
+          className="assistant-back"
+          aria-label="Go back to Home"
+          onClick={() => onNavigate?.('home')}
+        >
+          <BackArrowIcon />
+        </button>
+        <h1 className="assistant-title">
+          <span className="assistant-title-icon" aria-hidden="true">
+            <SparkleIcon />
+          </span>
+          Budget assistant
+        </h1>
+      </header>
 
+      <div className="assistant-messages">
         {messages.map((message) => {
           if (message.role === 'user') {
             return (
@@ -372,6 +374,7 @@ function AssistantScreen({ onNavigate }) {
 
           return <GenericResponseCard key={message.id} />
         })}
+        <div ref={messagesEndRef} className="assistant-messages-end" aria-hidden="true" />
       </div>
 
       <form className="assistant-input-bar" onSubmit={handleSubmit}>
